@@ -10,11 +10,11 @@ Your support helps maintain and improve this project. Thank you! 🙏
 
 ## 微信支付 / WeChat Pay
 
-![WeChat Pay](https://github.com/Pondsi/wenyanskill/raw/main/sponsors/wechat-pay.jpg)
+https://github.com/Pondsi/wenyanskill/blob/main/sponsors/wechat-pay.jpg
 
 ## 支付宝 / Alipay
 
-![Alipay](https://github.com/Pondsi/wenyanskill/raw/main/sponsors/alipay.jpg)
+https://github.com/Pondsi/wenyanskill/blob/main/sponsors/alipay.jpg
 
 ## Other Ways to Support
 
