@@ -1,36 +1,26 @@
-# Sponsors / 赞助者
+## 💖 Sponsors
 
-感谢以下赞助者支持 WenYan 项目的发展！
+If you find WenYan helpful, consider supporting its development!
 
-Thank you to the following sponsors for supporting the development of WenYan!
+Your support helps maintain and improve this project. Thank you! 🙏
 
-WenYan プロジェクトの開発を支援してくださっているスポンサーの皆様に感謝いたします！
+## PayPal
 
-WenYan 프로젝트 개발을 지원해 주신 후원자 여러분께 감사드립니다！
+[https://paypal.me/pondsi](https://paypal.me/pondsi)
 
-Merci aux sponsors suivants pour leur soutien au développement de WenYan!
+## 微信支付 / WeChat Pay
 
-Dankon al la sekvaj subtenantoj por subteni la disvolviĝon de WenYan!
+![WeChat Pay](sponsors/wechat-pay.jpg)
 
----
+## 支付宝 / Alipay
 
-## 支持方式 / How to Support
+![Alipay](sponsors/alipay.jpg)
 
-如果你想赞助此项目，可以通过以下方式：
+## Other Ways to Support
 
-If you would like to sponsor this project, you can:
+- ⭐ Star this repo — it helps others discover WenYan
+- 🐛 Report issues or suggest features
+- 🔀 Submit pull requests
+- 📢 Share with friends and colleagues
 
-- ⭐ 给仓库点 Star / Star the repository
-- 🐛 提交 Issue 和 PR / Submit Issues and PRs
-- 📢 分享给更多人 / Share with others
-- 💰 通过 GitHub Sponsors 赞助 / Sponsor via GitHub Sponsors
-
----
-
-## 当前赞助者 / Current Sponsors
-
-*暂无 / None yet*
-
-> 感谢每一位支持者！你的支持是项目前进的动力。
->
-> Thank you for every supporter! Your support drives the project forward.
+Thank you for your support! — Pondsi
