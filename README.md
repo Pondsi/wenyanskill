@@ -37,7 +37,7 @@ WenYan 是一个**通用的古风语体引擎**，提供 **8 种古中文风格*
 ### 安装
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### 使用方式
@@ -71,7 +71,7 @@ echo "你的回复文本" | python scripts/style_engine.py score sanguo
 
 | 智能体 | 接入方法 |
 |--------|----------|
-| **OpenClaw** | `openclaw skills install wenyan`，对 AI 说「切换三国风3」即可 |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`，对 AI 说「切换三国风3」即可 |
 | **Claude（claude.ai / API）** | 生成 prompt → 粘贴进 **Settings → System prompt**，或作为 API 的 `system` 字段 |
 | **ChatGPT（GPT-4 / GPT-5）** | 生成 prompt → 粘贴进 **Settings → Personalities / Custom instructions**，或用 Projects 的 Instructions |
 | **Gemini / Grok / 其他 Web AI** | 生成 prompt → 粘贴进 **Settings → System instructions** |
@@ -131,7 +131,7 @@ WenYan 是一個**通用的古風語體引擎**，提供 **8 種古中文風格*
 ### 安裝
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### 使用方式
@@ -165,7 +165,7 @@ echo "你的回覆文字" | python scripts/style_engine.py score sanguo
 
 | 智慧體 | 接入方法 |
 |--------|----------|
-| **OpenClaw** | `openclaw skills install wenyan`，對 AI 說「切換三國風3」 |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`，對 AI 說「切換三國風3」 |
 | **Claude（claude.ai / API）** | 產生 prompt → **Settings → System prompt**，或 API 的 `system` 欄位 |
 | **ChatGPT（GPT-4 / GPT-5）** | 產生 prompt → **Settings → Personalities / Custom instructions** |
 | **Gemini / Grok / 其他 Web AI** | 產生 prompt → **Settings → System instructions** |
@@ -219,7 +219,7 @@ WenYan is a **universal classical Chinese style engine** providing **8 classical
 ### Installation
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### Usage
@@ -253,7 +253,7 @@ echo "your reply text" | python scripts/style_engine.py score sanguo
 
 | Agent | Integration |
 |-------|-------------|
-| **OpenClaw** | `openclaw skills install wenyan`, then tell the AI "Switch to Sanguo 3" |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`, then tell the AI "Switch to Sanguo 3" |
 | **Claude (claude.ai / API)** | Generate prompt → paste into **Settings → System prompt**, or use as the API `system` field |
 | **ChatGPT (GPT-4 / GPT-5)** | Generate prompt → paste into **Settings → Personalities / Custom instructions**, or use Projects Instructions |
 | **Gemini / Grok / other Web AI** | Generate prompt → paste into **Settings → System instructions** |
@@ -311,7 +311,7 @@ WenYan は**汎用の古典中国語スタイルエンジン**で、**8種の古
 ### インストール
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### 使い方
@@ -345,7 +345,7 @@ echo "あなたの返信テキスト" | python scripts/style_engine.py score san
 
 | エージェント | 統合方法 |
 |--------------|----------|
-| **OpenClaw** | `openclaw skills install wenyan`、AIに「三國風3に切替」と言う |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`、AIに「三國風3に切替」と言う |
 | **Claude（claude.ai / API）** | prompt 生成 → **Settings → System prompt** に貼り付け、または API の `system` フィールドに使用 |
 | **ChatGPT（GPT-4 / GPT-5）** | prompt 生成 → **Settings → Personalities / Custom instructions** に貼り付け |
 | **Gemini / Grok / その他 Web AI** | prompt 生成 → **Settings → System instructions** に貼り付け |
@@ -389,7 +389,7 @@ WenYan은**범용 고전 중국어 스타일 엔진**으로, **8가지 고전 �
 ### 설치
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### 사용법
@@ -423,7 +423,7 @@ echo "귀하의 응답 텍스트" | python scripts/style_engine.py score sanguo
 
 | 에이전트 | 통합 방법 |
 |----------|----------|
-| **OpenClaw** | `openclaw skills install wenyan`, AI 에게 "삼국풍3으로 전환" |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`, AI 에게 "삼국풍3으로 전환" |
 | **Claude (claude.ai / API)** | prompt 생성 → **Settings → System prompt** 에 붙여넣기, 또는 API 의 `system` 필드 사용 |
 | **ChatGPT (GPT-4 / GPT-5)** | prompt 생성 → **Settings → Personalities / Custom instructions** 에 붙여넣기 |
 | **Gemini / Grok / 기타 Web AI** | prompt 생성 → **Settings → System instructions** 에 붙여넣기 |
@@ -467,7 +467,7 @@ WenYan est un **moteur de style chinois classique universel** offrant **8 styles
 ### Installation
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### Utilisation
@@ -501,7 +501,7 @@ echo "votre texte de réponse" | python scripts/style_engine.py score sanguo
 
 | Agent | Intégration |
 |-------|-------------|
-| **OpenClaw** | `openclaw skills install wenyan`, dire à l'AI "Passer en Sanguo 3" |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`, dire à l'AI "Passer en Sanguo 3" |
 | **Claude (claude.ai / API)** | Générer le prompt → coller dans **Settings → System prompt**, ou champ `system` de l'API |
 | **ChatGPT (GPT-4 / GPT-5)** | Générer le prompt → coller dans **Settings → Personalities / Custom instructions** |
 | **Gemini / Grok / autre Web AI** | Générer le prompt → coller dans **Settings → System instructions** |
@@ -545,7 +545,7 @@ WenYan estas **universala klasika ĉina skribskra-stil-motoro** ofertanta **8 st
 ### Instalado
 
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 
 ### Uzo
@@ -579,7 +579,7 @@ echo "via responda teksto" | python scripts/style_engine.py score sanguo
 
 | Aginto | Integraĵo |
 |--------|-----------|
-| **OpenClaw** | `openclaw skills install wenyan`, diri al la AI "Ŝanĝi al Sanguo 3" |
+| **OpenClaw** | `openclaw skills install @pondsi/wenyan-engine`, diri al la AI "Ŝanĝi al Sanguo 3" |
 | **Claude (claude.ai / API)** | Generi prompton → glui en **Settings → System prompt**, aŭ kiel la `system`-kampo de la API |
 | **ChatGPT (GPT-4 / GPT-5)** | Generi prompton → glui en **Settings → Personalities / Custom instructions** |
 | **Gemini / Grok / aliaj Web-AI** | Generi prompton → glui en **Settings → System instructions** |

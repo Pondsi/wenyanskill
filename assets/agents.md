@@ -87,7 +87,7 @@ python scripts/style_engine.py prompt sanguo
 
 ### OpenClaw
 ```bash
-openclaw skills install wenyan
+openclaw skills install @pondsi/wenyan-engine
 ```
 Then simply tell the AI: **切换三国风3** / **Switch to Sanguo 3**. OpenClaw reads `SKILL.md` and `state.json` automatically, so the style persists across turns until you exit.
 
