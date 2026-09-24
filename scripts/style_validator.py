@@ -38,7 +38,7 @@ def load_tests(style_id=None):
     for fname in sorted(os.listdir(TESTS_DIR)):
         if not fname.endswith(".test.json"):
             continue
-        if style_id and not fname.startswith(style_id):
+        if style_id and not fname.startswith(style_id + "."):
             continue
         path = os.path.join(TESTS_DIR, fname)
         with open(path, "r", encoding="utf-8") as f:

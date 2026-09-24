@@ -1,4 +1,4 @@
-# Contributing to WenYan
+﻿# Contributing to WenYan
 
 Thank you for your interest in improving the WenYan classical Chinese style engine! 🏮
 
@@ -8,10 +8,10 @@ WenYan is a **general-purpose classical Chinese style engine** — it works with
 
 | Area | What you can add |
 |------|-----------------|
-| **New styles** | A new classical style as a JSON block in `assets/styles.json` (see `references/custom-styles.md`) |
+| **New styles** | A new classical style as a JSON block in `references/styles/*.style.json` (see `references/styles/*.style.json`) |
 | **Translations** | Localize `README.md` / `SPONSORS.md` into more languages |
 | **Engine** | Improve `generate.py`, `validate.py`, `score.py` (Python, no external deps) |
-| **Tests** | Add cases to `tests/test_styles.py` |
+| **Tests** | Add cases to `tests/*.test.json` |
 | **Docs** | Fix errors, improve the per-agent guide in `assets/agents.md` |
 | **Bug reports** | Open an Issue with a minimal reproduction |
 
@@ -23,14 +23,14 @@ git clone https://github.com/Pondsi/wenyanskill.git
 cd wenyanskill
 
 # 2. Generate a prompt (any style / intensity)
-python scripts/generate.py --style wangchao --intensity 3 --out prompt.md
+python scripts/style_engine.py --style ruya --intensity 3 --out prompt.md
 
 # 3. Validate + score a candidate reply
-python scripts/validate.py --style wangchao --text-file reply.txt
-python scripts/score.py    --style wangchao --text-file reply.txt
+python scripts/style_engine.py --style ruya --text-file reply.txt
+python scripts/style_engine.py    --style ruya --text-file reply.txt
 
 # 4. Run the test suite
-python -m pytest tests/ -q
+python scripts/style_validator.py regression
 ```
 
 The engine has **zero external Python dependencies** — it runs anywhere `python3` exists.
@@ -44,7 +44,7 @@ The engine has **zero external Python dependencies** — it runs anywhere `pytho
 
 ## Pull Request Checklist
 
-- [ ] `python -m pytest tests/ -q` passes
+- [ ] `python scripts/style_validator.py regression` passes
 - [ ] No local absolute paths or personal machine details in added files
 - [ ] New style (if any) passes `validate.py` self-check
 - [ ] README / agents.md updated if the change is user-facing
@@ -61,3 +61,5 @@ By contributing, you agree your contributions are licensed under the **MIT Licen
 ---
 
 WenYan — 古風語體引擎 · Made with ❤️ by [Pondsi](https://github.com/Pondsi)
+
+

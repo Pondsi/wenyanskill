@@ -29,11 +29,22 @@ MODERN_SYMBOLS = set(
 )
 
 
+def _check_style_id(style_id):
+    """Validate style_id to prevent path traversal (C1 fix)."""
+    import re as _re
+    if not _re.fullmatch(r'[A-Za-z0-9_-]{1,64}', style_id):
+        raise ValueError("Invalid style_id: " + repr(style_id))
+
+
 def load_style(style_id):
+    _check_style_id(style_id)
     path = os.path.join(STYLES_DIR, style_id + ".style.json")
-    if not os.path.exists(path):
-        raise FileNotFoundError("Style config not found: " + path)
-    with open(path, "r", encoding="utf-8") as f:
+    resolved = os.path.realpath(path)
+    if not resolved.startswith(os.path.realpath(STYLES_DIR)):
+        raise ValueError("Path traversal detected")
+    if not os.path.isfile(resolved):
+        raise FileNotFoundError("Style config not found: " + style_id)
+    with open(resolved, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -130,19 +141,85 @@ def is_modern_char(ch):
 def calculate_modern_ratio(text):
     chinese = count_chinese_chars(text)
     if chinese == 0:
-        return 0.0
-    modern = sum(1 for ch in text if is_modern_char(ch))
-    return modern / len(text) if len(text) > 0 else 0.0
+        return 0.0  # validate_text will catch no-Chinese as error
+    # Strip technical spans before counting (code/URLs/paths exempt per SKILL.md)
+    t = re.sub(r'```[\s\S]*?```', ' ', text)  # fenced code
+    t = re.sub(r'`[^`]*`', ' ', t)             # inline code
+    t = re.sub(r'https?://\S+', ' ', t)        # URLs
+    t = re.sub(r'[A-Za-z]:\\[^\s]+', ' ', t) # Windows paths
+    t = re.sub(r'\w+\.\w+\([^)]*\)', ' ', t) # function calls like json.load()
+    # Count remaining modern chars: all-caps acronyms (≥2) are technical nouns
+    modern = 0
+    for ch in t:
+        cp = ord(ch)
+        is_ascii_alnum = (0x41 <= cp <= 0x5A) or (0x61 <= cp <= 0x7A) or (0x30 <= cp <= 0x39)
+        if not is_ascii_alnum:
+            if ch in MODERN_SYMBOLS or (0xFF21 <= cp <= 0xFF3A) or (0xFF41 <= cp <= 0xFF5A) or (0xFF10 <= cp <= 0xFF19):
+                modern += 1
+            continue
+        # Skip capitalized/all-caps tokens (technical proper nouns)
+        # Find the token span
+        pos = t.index(ch) if ch in t else -1
+        # Simple approach: count per-char, skip uppercase-starting runs
+        # (conservative: bare uppercase acronyms like JSON/API exempt;
+        # lowercase English prose like 'hello' still counts as modern)
+        pass  # will count below
+    # Recompute with cleaner logic
+    modern = 0
+    i = 0
+    while i < len(t):
+        ch = t[i]
+        cp = ord(ch)
+        # CJK modern symbols always count
+        if ch in MODERN_SYMBOLS or (0xFF21 <= cp <= 0xFF3A) or (0xFF41 <= cp <= 0xFF5A) or (0xFF10 <= cp <= 0xFF19):
+            modern += 1; i += 1; continue
+        # ASCII alphanumeric: extract full token, check if exempt
+        if (0x41 <= cp <= 0x5A) or (0x61 <= cp <= 0x7A) or (0x30 <= cp <= 0x39):
+            j = i
+            while j < len(t):
+                c2 = ord(t[j])
+                if (0x41 <= c2 <= 0x5A) or (0x61 <= c2 <= 0x7A) or (0x30 <= c2 <= 0x39) or t[j] in '_.':
+                    j += 1
+                else:
+                    break
+            token = t[i:j]
+            # Exempt: all-caps acronyms (≥2), dotted identifiers (code-like)
+            is_exempt = ('.' in token) or (len(token) >= 2 and token == token.upper() and any(c.isalpha() for c in token))
+            if not is_exempt:
+                modern += len(token)  # count all chars in non-exempt token
+            i = j
+            continue
+        i += 1
+    return modern / len(t) if len(t) > 0 else 0.0
 
 
 def check_forbidden_patterns(text, style):
     found = []
     taboo = load_taboo_words()
     for word in taboo:
-        if word in text:
-            found.append("Global taboo: " + word)
+        if not word:
+            continue
+        # ASCII words: word-boundary match to avoid 'bug' in 'debug' (C6⑤)
+        if all(c.isascii() and (c.isalnum() or c == '_') for c in word):
+            import re as _re
+            if _re.search(r'(?<![A-Za-z0-9_])' + _re.escape(word) + r'(?![A-Za-z0-9_])', text):
+                found.append("Global taboo: " + word)
+        else:
+            if word in text:
+                found.append("Global taboo: " + word)
     for pattern in style.get("forbidden_patterns", []):
-        matches = re.findall(pattern, text)
+        if len(pattern) > 200:
+            found.append("Pattern too long (skipped): " + pattern[:30] + "...")
+            continue
+        try:
+            compiled = re.compile(pattern)
+        except re.error:
+            found.append("Invalid pattern (skipped): " + pattern[:30])
+            continue
+        try:
+            matches = compiled.findall(text[:20000])
+        except Exception:
+            continue
         for m in matches:
             found.append("Forbidden pattern: " + m)
     return found
@@ -200,6 +277,10 @@ def validate_text(text, style_id):
     errors = []
     warnings = []
 
+    # C3 fix: no Chinese content → explicit fail (not silent pass)
+    if count_chinese_chars(text) == 0:
+        errors.append("No classical Chinese content detected (pure modern/code output)")
+
     forbidden = check_forbidden_patterns(text, style)
     if forbidden:
         errors.extend(["Forbidden word: " + w for w in forbidden])
@@ -215,6 +296,10 @@ def validate_text(text, style_id):
     drift = check_style_drift(text, style)
     if drift:
         warnings.extend(drift)
+
+    # C6④: flag unsubstituted placeholders in output
+    if re.search(r'\{self\}|\{other\}', text):
+        errors.append("Unsubstituted placeholder detected: {self}/{other} must be replaced with address terms")
 
     return {
         "style_id": style_id,

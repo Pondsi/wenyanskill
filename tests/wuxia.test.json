@@ -43,7 +43,7 @@
       "expect_contains": ["Python", "JSON"],
       "expect_not_contains": ["互联网", "AI"],
       "max_length_per_sentence": 20,
-      "min_score": 20,
+      "min_score": 70,
       "note": "Technical terms (Python/JSON) are allowed per SKILL.md exception rule"
     }
   ]

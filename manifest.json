@@ -10,7 +10,7 @@
   },
   "emoji": "📜",
   "compatibility": ["openclaw", "claude", "chatgpt", "gemini", "dify", "ollama", "cursor", "any-system-prompt-agent"],
-  "license": "MIT-0",
+  "license": "MIT",
   "styles": [
     {
       "id": "ruya",
