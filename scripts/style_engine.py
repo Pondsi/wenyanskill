@@ -148,23 +148,7 @@ def calculate_modern_ratio(text):
     t = re.sub(r'https?://\S+', ' ', t)        # URLs
     t = re.sub(r'[A-Za-z]:\\[^\s]+', ' ', t) # Windows paths
     t = re.sub(r'\w+\.\w+\([^)]*\)', ' ', t) # function calls like json.load()
-    # Count remaining modern chars: all-caps acronyms (≥2) are technical nouns
-    modern = 0
-    for ch in t:
-        cp = ord(ch)
-        is_ascii_alnum = (0x41 <= cp <= 0x5A) or (0x61 <= cp <= 0x7A) or (0x30 <= cp <= 0x39)
-        if not is_ascii_alnum:
-            if ch in MODERN_SYMBOLS or (0xFF21 <= cp <= 0xFF3A) or (0xFF41 <= cp <= 0xFF5A) or (0xFF10 <= cp <= 0xFF19):
-                modern += 1
-            continue
-        # Skip capitalized/all-caps tokens (technical proper nouns)
-        # Find the token span
-        pos = t.index(ch) if ch in t else -1
-        # Simple approach: count per-char, skip uppercase-starting runs
-        # (conservative: bare uppercase acronyms like JSON/API exempt;
-        # lowercase English prose like 'hello' still counts as modern)
-        pass  # will count below
-    # Recompute with cleaner logic
+    # Count remaining modern chars: token-level exemption logic
     modern = 0
     i = 0
     while i < len(t):
