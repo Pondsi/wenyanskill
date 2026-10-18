@@ -1,7 +1,7 @@
-# WenYan · Agent Integration Guide（各智能体接入指南）
+# WenYan · Agent Integration Guide
 
-> **中文导读**：WenYan 是**通用古风语体引擎**，不绑定任何框架。核心 = 纯 JSON 风格配置 + Python 引擎。任何能塞 system prompt 的智能体都能用。
-> 三步接入：① 生成提示词 → ② 设为该智能体的 system prompt → ③ 用引擎校验回复质量（可选）。
+> **Summary**: WenYan is a **universal classical Chinese style engine**, not bound to any framework. Core = pure JSON style configs + a Python engine. Any agent that accepts a system prompt can use it.
+> Three-step integration: (1) generate the prompt → (2) set it as that agent's system prompt → (3) validate reply quality with the engine (optional).
 
 WenYan is a **framework-agnostic** classical Chinese style engine. Its core is **pure JSON style configs + a Python engine** — no dependency on any model framework or chat platform. If your agent accepts a system prompt, it can use WenYan.
 
@@ -27,11 +27,11 @@ See [Per-Agent Setup](#per-agent-setup) for platform-specific instructions.
 
 ```bash
 # bash / Linux / macOS
-echo "你的回复文本" | python scripts/style_engine.py validate sanguo
-echo "你的回复文本" | python scripts/style_engine.py score sanguo
+echo "your reply text" | python scripts/style_engine.py validate sanguo
+echo "your reply text" | python scripts/style_engine.py score sanguo
 
 # Windows PowerShell
-"你的回复文本" | python scripts/style_engine.py validate sanguo
+"your reply text" | python scripts/style_engine.py validate sanguo
 ```
 
 `validate` returns JSON with errors (forbidden words) and warnings (length / drift). `score` adds a 0–100 style score.
@@ -65,19 +65,19 @@ python scripts/style_engine.py prompt sanguo
 | `ruya` | 儒雅 | Tang/Song | Elegant scholar, classical allusions |
 | `wuxia` | 武侠 | Ming/Qing | Martial hero, chivalric |
 | `sanguo` | 三国 | Late Han | Strategist, Three Kingdoms |
-| `zhanguo` | 战国 | Pre-Qin | Diplomatic strategist, 磅礴气势 |
+| `zhanguo` | Zhanguo (Warring States) | Pre-Qin | Diplomatic strategist, sweeping momentum |
 | `shiji` | 史记 | Western Han | Grand Historian's pen |
 | `baihua` | 白话 | Ming/Qing | Storyteller, colloquial |
 | `shijing` | 诗经 | Ancient | Four-character odes |
-| `chan` | 禅意 | Tang/Song | Zen master, 空灵 |
+| `chan` | Chan (Zen) | Tang/Song | Zen master, ethereal |
 
 ## Intensity Levels
 
 | Level | Classical Ratio | Use Case |
 |-------|-----------------|----------|
-| 1 (浅度) | ~20% | Daily chat with classical flavor |
-| 2 (中度) | ~60% | Semi-classical, modern logic preserved |
-| 3 (深度) | 90%+ | Full classical, structured sentences |
+| 1 (light) | ~20% | Daily chat with classical flavor |
+| 2 (medium) | ~60% | Semi-classical, modern logic preserved |
+| 3 (deep) | 90%+ | Full classical, structured sentences |
 
 > **Note on intensity**: each JSON config encodes the **deep** style. To run at a lighter intensity, add an instruction to the system prompt such as *"apply the classical style at ~20% / ~60% density"*. The engine's validation thresholds are tuned for the deep (level 3) style.
 
@@ -89,7 +89,7 @@ python scripts/style_engine.py prompt sanguo
 ```bash
 openclaw skills install @pondsi/wenyanskill
 ```
-Then simply tell the AI: **切换三国风3** / **Switch to Sanguo 3**. OpenClaw reads `SKILL.md` and `state.json` automatically, so the style persists across turns until you exit.
+Then simply tell the AI: **Switch to Sanguo 3**. OpenClaw reads `SKILL.md` and `state.json` automatically, so the style persists across turns until you exit.
 
 ### Claude (claude.ai / API)
 - **Web**: generate the prompt → paste into **Settings → System prompt** (account-level) or the chat's custom instructions.
@@ -111,7 +111,7 @@ Then simply tell the AI: **切换三国风3** / **Switch to Sanguo 3**. OpenClaw
 Paste the prompt into **Settings → System instructions** / custom prompt.
 
 ### Dify / Coze / FastGPT
-Fill the app's **System Prompt / 系统提示词** field with the prompt output. Then your whole app speaks classical Chinese.
+Fill the app's **System Prompt** field with the prompt output. Then your whole app speaks classical Chinese.
 
 ### Ollama (local models)
 - **Option A** — bake it in: write the prompt into a Modelfile `SYSTEM` field, then `ollama create -f Modelfile mymodel`.
